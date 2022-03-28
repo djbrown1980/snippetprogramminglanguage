@@ -1,0 +1,23 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Remove labels
+on:
+  project_card:
+    types:
+      - moved
+jobs:
+  remove_labels:
+    if: github.event.project_card.column_id == '18316673'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: remove labels
+        uses: andymckay/labeler@5c59dabdfd4dd5bd9c6e6d255b01b9d764af4414
+        with:
+          remove-labels: "opened"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
